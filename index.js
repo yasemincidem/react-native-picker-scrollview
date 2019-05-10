@@ -48,7 +48,7 @@ export const SelectedItem = props => {
       {props.children}
     </View>
   )
-}
+};
 
 const deviceWidth = Dimensions.get('window').width;
 export default class ScrollPicker extends React.Component {
