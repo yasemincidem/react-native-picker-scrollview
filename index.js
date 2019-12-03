@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {
   View,
+  Text,
   ScrollView,
   Platform,
 } from 'react-native';
@@ -75,12 +76,13 @@ export default class ScrollPicker extends React.Component {
     const { header, footer } = this.renderPlaceHolder();
 
     return (
-      <Container wrapperHeight={this.props.wrapperHeight} wrapperWidth={this.props.wrapperWidth} wrapperBackground={this.props.wrapperBackground}>
+      <Container wrapperHeight={this.props.wrapperHeight} wrapperWidth={this.props.wrapperWidth}
+                 wrapperBackground={this.props.wrapperBackground}>
         <HighLightView highlightColor={this.props.highlightColor}
                        highlightWidth={this.props.highlightWidth}
                        wrapperHeight={this.props.wrapperHeight}
                        itemHeight={this.props.itemHeight}
-                       highlightBorderWidth={this.props.highlightBorderWidth} />
+                       highlightBorderWidth={this.props.highlightBorderWidth}/>
         <ScrollView
           ref={(sview) => {
             this.sview = sview;
@@ -103,13 +105,14 @@ export default class ScrollPicker extends React.Component {
 
   renderPlaceHolder() {
     const height = (this.props.wrapperHeight - this.props.itemHeight) / 2;
-    const header = <View style={{ height, flex: 1 }}></View>;
-    const footer = <View style={{ height, flex: 1 }}></View>;
-    return { header, footer };
+    const header = <View style={{height, flex: 1}}></View>;
+    const footer = <View style={{height, flex: 1}}></View>;
+    return {header, footer};
   }
 
   renderItemDefault(data, index) {
     const isSelected = index === this.state.selectedIndex;
+
     const item = <ItemText color={isSelected === true ? this.props.activeItemColor : this.props.itemColor}>{data}</ItemText>;
 
     return (
@@ -132,7 +135,9 @@ export default class ScrollPicker extends React.Component {
       if (Platform.OS === 'ios') {
         this.isScrollTo = true;
       }
-      this.sview.scrollTo({ y: verticalElem });
+      if (this.sview) {
+        this.sview.scrollTo({y: verticalElem});
+      }
     }
     if (this.state.selectedIndex === selectedIndex) {
       return;
@@ -201,7 +206,11 @@ export default class ScrollPicker extends React.Component {
       selectedIndex: ind,
     });
     const y = this.props.itemHeight * ind;
-    this.sview.scrollTo({ y });
+    setTimeout(() => {
+      if (this.sview) {
+        this.sview.scrollTo({y});
+      }
+    }, 0);
   }
 }
 
@@ -218,8 +227,8 @@ ScrollPicker.propTypes = {
   wrapperHeight: PropTypes.number,
   highlightWidth: PropTypes.number,
   highlightBorderWidth: PropTypes.number,
-  activeItemColor: PropTypes.string,
-  itemColor: PropTypes.string,
+  itemTextStyle: PropTypes.object,
+  activeItemTextStyle: PropTypes.object,
   onMomentumScrollEnd: PropTypes.func,
   onScrollEndDrag: PropTypes.func,
 };
@@ -233,8 +242,10 @@ ScrollPicker.defaultProps = {
   highlightWidth: '100%',
   highlightBorderWidth: 2,
   highlightColor: '#333',
-  activeItemColor: '#222121',
-  itemColor: '#B4B4B4',
-  onMomentumScrollEnd: () => {},
-  onScrollEndDrag: () => {},
+  onMomentumScrollEnd: () => {
+  },
+  onScrollEndDrag: () => {
+  },
+  itemTextStyle: {fontSize: 20, lineHeight: 26, textAlign: 'center', color: '#B4B4B4'},
+  activeItemTextStyle: {fontSize: 20, lineHeight: 26, textAlign: 'center', color: '#222121'}
 };
