@@ -35,7 +35,7 @@ export const SelectedItem = styled.View`
   height: ${props => props.itemHeight};
 `;
 const deviceWidth = Dimensions.get('window').width;
-export default class CMonthPicker extends React.Component {
+export default class ScrollPicker extends React.Component {
   constructor() {
     super();
     this.onMomentumScrollBegin = this.onMomentumScrollBegin.bind(this);
@@ -200,7 +200,7 @@ export default class CMonthPicker extends React.Component {
     }, 0);
   }
 }
-CMonthPicker.propTypes = {
+ScrollPicker.propTypes = {
   style: PropTypes.object,
   dataSource: PropTypes.array,
   selectedIndex: PropTypes.number,
@@ -219,7 +219,7 @@ CMonthPicker.propTypes = {
   onMomentumScrollEnd: PropTypes.func,
   onScrollEndDrag: PropTypes.func,
 };
-CMonthPicker.defaultProps = {
+ScrollPicker.defaultProps = {
   dataSource: [1, 2, 3],
   itemHeight: 60,
   wrapperBackground: '#FFFFFF',
