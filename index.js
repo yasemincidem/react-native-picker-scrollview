@@ -26,6 +26,7 @@ export const HighLightView = styled.View`
   border-bottom-color: ${props => props.highlightColor};
   border-top-width: ${props => props.highlightBorderWidth}px;
   border-bottom-width: ${props => props.highlightBorderWidth}px;
+  background-color: ${props => props.highlightBackground};
 `;
 export const SelectedItem = styled.View`
   height: 30px;
@@ -59,15 +60,17 @@ export default class ScrollPicker extends React.Component {
   }
 
   render() {
-    const {header, footer} = this.renderPlaceHolder();
+    const { header, footer } = this.renderPlaceHolder();
     return (
       <Container wrapperHeight={this.props.wrapperHeight} wrapperWidth={this.props.wrapperWidth}
-                 wrapperBackground={this.props.wrapperBackground}>
+        wrapperBackground={this.props.wrapperBackground}>
         <HighLightView highlightColor={this.props.highlightColor}
-                       highlightWidth={this.props.highlightWidth}
-                       wrapperHeight={this.props.wrapperHeight}
-                       itemHeight={this.props.itemHeight}
-                       highlightBorderWidth={this.props.highlightBorderWidth}/>
+          highlightWidth={this.props.highlightWidth}
+          wrapperHeight={this.props.wrapperHeight}
+          itemHeight={this.props.itemHeight}
+          highlightBorderWidth={this.props.highlightBorderWidth}
+          highlightBackground={this.props.highlightBackground}
+        />
         <ScrollView
           ref={(sview) => {
             this.sview = sview;
@@ -90,9 +93,9 @@ export default class ScrollPicker extends React.Component {
 
   renderPlaceHolder() {
     const height = (this.props.wrapperHeight - this.props.itemHeight) / 2;
-    const header = <View style={{height, flex: 1}}></View>;
-    const footer = <View style={{height, flex: 1}}></View>;
-    return {header, footer};
+    const header = <View style={{ height, flex: 1 }}></View>;
+    const footer = <View style={{ height, flex: 1 }}></View>;
+    return { header, footer };
   }
 
   renderItem(data, index) {
@@ -120,7 +123,7 @@ export default class ScrollPicker extends React.Component {
         this.isScrollTo = true;
       }
       if (this.sview) {
-        this.sview.scrollTo({y: verticalElem});
+        this.sview.scrollTo({ y: verticalElem });
       }
     }
     if (this.state.selectedIndex === selectedIndex) {
@@ -192,7 +195,7 @@ export default class ScrollPicker extends React.Component {
     const y = this.props.itemHeight * ind;
     setTimeout(() => {
       if (this.sview) {
-        this.sview.scrollTo({y});
+        this.sview.scrollTo({ y });
       }
     }, 0);
   }
@@ -206,6 +209,7 @@ ScrollPicker.propTypes = {
   highlightColor: PropTypes.string,
   itemHeight: PropTypes.number,
   wrapperBackground: PropTypes.string,
+  highlightBackground: PropTypes.string,
   wrapperWidth: PropTypes.number,
   wrapperHeight: PropTypes.number,
   highlightWidth: PropTypes.number,
@@ -222,12 +226,13 @@ ScrollPicker.defaultProps = {
   wrapperHeight: 180,
   wrapperWidth: 150,
   highlightWidth: deviceWidth,
+  highlightBackground: '#FFFFFF',
   highlightBorderWidth: 2,
   highlightColor: '#333',
   onMomentumScrollEnd: () => {
   },
   onScrollEndDrag: () => {
   },
-  itemTextStyle: {fontSize: 20, lineHeight: 26, textAlign: 'center', color: '#B4B4B4'},
-  activeItemTextStyle: {fontSize: 20, lineHeight: 26, textAlign: 'center', color: '#222121'}
+  itemTextStyle: { fontSize: 20, lineHeight: 26, textAlign: 'center', color: '#B4B4B4' },
+  activeItemTextStyle: { fontSize: 20, lineHeight: 26, textAlign: 'center', color: '#222121' }
 };
