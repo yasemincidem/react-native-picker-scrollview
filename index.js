@@ -79,6 +79,7 @@ export default class ScrollPicker extends React.Component {
           onMomentumScrollEnd={this.onMomentumScrollEnd}
           onScrollBeginDrag={this.onScrollBeginDrag}
           onScrollEndDrag={this.onScrollEndDrag}
+          nestedScrollEnabled={this.props.nestedScrollEnabled}
         >
           {header}
           {this.props.dataSource.map(this.renderItem.bind(this))}
@@ -214,6 +215,7 @@ ScrollPicker.propTypes = {
   activeItemTextStyle: PropTypes.object,
   onMomentumScrollEnd: PropTypes.func,
   onScrollEndDrag: PropTypes.func,
+  nestedScrollEnabled: PropTypes.bool,
 };
 ScrollPicker.defaultProps = {
   dataSource: [1, 2, 3],
