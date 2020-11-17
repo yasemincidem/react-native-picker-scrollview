@@ -2,7 +2,7 @@
   "name": "react-native-wheel-scroll-picker",
   "version": "0.2.4",
   "description": "a pure js picker, each option item customizable",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
