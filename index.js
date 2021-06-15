@@ -24,8 +24,8 @@ export const HighLightView = styled.View`
   width: ${props => props.highlightWidth};
   border-top-color: ${props => props.highlightColor};
   border-bottom-color: ${props => props.highlightColor};
-  border-top-width: ${props => props.highlightBorderWidth}px;
-  border-bottom-width: ${props => props.highlightBorderWidth}px;
+  border-top-width: ${props => props.highlightTopBorderWidth}px;
+  border-bottom-width: ${props => props.highlightBottomBorderWidth}px;
 `;
 export const SelectedItem = styled.View`
   height: 30px;
@@ -67,7 +67,8 @@ export default class ScrollPicker extends React.Component {
                        highlightWidth={this.props.highlightWidth}
                        wrapperHeight={this.props.wrapperHeight}
                        itemHeight={this.props.itemHeight}
-                       highlightBorderWidth={this.props.highlightBorderWidth}/>
+                       highlightTopBorderWidth={this.props.highlightTopBorderWidth}
+                       highlightBottomBorderWidth={this.props.highlightBottomBorderWidth}/>
         <ScrollView
           ref={(sview) => {
             this.sview = sview;
@@ -209,7 +210,8 @@ ScrollPicker.propTypes = {
   wrapperWidth: PropTypes.number,
   wrapperHeight: PropTypes.number,
   highlightWidth: PropTypes.number,
-  highlightBorderWidth: PropTypes.number,
+  highlightTopBorderWidth: PropTypes.number,
+  highlightBottomBorderWidth: PropTypes.number,
   itemTextStyle: PropTypes.object,
   activeItemTextStyle: PropTypes.object,
   onMomentumScrollEnd: PropTypes.func,
@@ -222,7 +224,8 @@ ScrollPicker.defaultProps = {
   wrapperHeight: 180,
   wrapperWidth: 150,
   highlightWidth: deviceWidth,
-  highlightBorderWidth: 2,
+  highlightTopBorderWidth: 0,
+  highlightBottomBorderWidth: 2,
   highlightColor: '#333',
   onMomentumScrollEnd: () => {
   },
